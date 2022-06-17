@@ -1,0 +1,24 @@
+main:
+  training_data: ./data/train.csv
+  test_data: ./data/test.csv
+  save_pth: ./weights
+  regressor_filename: lgbm.pkl
+
+train_config:
+  learning_rate: 0.01
+  max_depth: 16
+  objective: 'regression'
+  metric: 'mse'
+  num_leaves: 10
+  eval_metric: mse
+
+regressor:
+  type: lgbm
+  params:
+    n_estimators: 2000
+
+feature_engineering: [
+  "finddow",
+  "find_hol",
+  "date_to_int",
+]
