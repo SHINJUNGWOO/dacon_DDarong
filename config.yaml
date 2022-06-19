@@ -1,8 +1,12 @@
 main:
+  data_pth: ./data
   training_data: ./data/train.csv
   test_data: ./data/test.csv
   save_pth: ./weights
   regressor_filename: lgbm.pkl
+
+  log_pth: ./logs
+  log_filename: log.txt
 
 train_config:
   learning_rate: 0.01

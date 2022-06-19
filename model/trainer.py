@@ -1,5 +1,6 @@
 import joblib
 import os
+import sys
 
 from utils.data import load_config, load_csv
 from .feature_engineering import feature_engineering
@@ -20,6 +21,8 @@ class Trainer:
             self.config["main"]["save_pth"],
             self.config["main"]["regressor_filename"]
         )
+        self.log_pth = self.config["main"]["log_pth"]
+        self.log_filename = self.config["main"]["log_filename"]
 
         # get the train, test data as pandas dataframe
         trainset, target = load_csv(
@@ -35,7 +38,10 @@ class Trainer:
 
         # train, val split
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(trainset, target)
+        self.y_train = self.y_train/5000.
+        self.y_test = self.y_test/5000.
 
+        # define model components
         self.model = build_regressor(self.config["regressor"])
 
     def _expand_features(self, dataframe):
