@@ -1,4 +1,5 @@
 main:
+  data_pth: ./data
   training_data: ./data/train.csv
   test_data: ./data/test.csv
   save_pth: ./weights
