@@ -1,6 +1,9 @@
 import joblib
 import os
 
+import numpy as np
+import pandas as pd
+
 from utils.data import load_config, load_csv
 from .feature_engineering import feature_engineering
 from .builder import build_regressor
@@ -53,6 +56,10 @@ class Trainer:
 
         return dataframe
 
+    @staticmethod
+    def nmae(true , pred):
+        return np.mean((np.abs(true-pred))/true)
+
     def fit(self):
         self.model.fit(
             self.X_train,
@@ -64,4 +71,17 @@ class Trainer:
         joblib.dump(self.model, self.model_pth)
 
     def test(self):
-        pass
+        # load model weights
+        self.model = joblib.load(self.model_pth)
+
+        # get model predictions
+        preds = self.model.predict(self.testset)
+        preds = np.around(preds)
+
+        # write submission file
+        submission = pd.read_csv(os.path.join(
+            self.config["main"]["data_pth"], "sample_submission.csv"
+        ))
+        submission["rental"] = preds
+
+        submission.to_csv("submission.csv", mode='w')
