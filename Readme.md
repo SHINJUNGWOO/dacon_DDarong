@@ -3,9 +3,9 @@
 
     python3 train.py
 
-학습이 완료되면 가중치 파일이 config.yaml에서 지정된 경로에 저장됨(TODO 경로 확인 코드 추가)
-save_pth: 가중치 파일을 저장할 경로
-regressor_filename: 가중치 파일 이름
+학습이 완료되면 가중치 파일이 config.yaml에서 지정된 경로에 저장됨(TODO 경로 확인 코드 추가)  
+save_pth: 가중치 파일을 저장할 경로  
+regressor_filename: 가중치 파일 이름  
 
 # submission
 아래 코드를 실행
